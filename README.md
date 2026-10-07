@@ -12,7 +12,7 @@ Hangshot is a free Windows app that hangs every screenshot you take on a rope ac
 
 First launch: if Windows shows "Windows protected your PC", click **More info**, then **Run anyway**. Hangshot updates itself after that.
 
-Website: [deeprajdev.github.io/hangshot](https://deeprajdev.github.io/hangshot/)
+Website: [hangshot.vercel.app](https://hangshot.vercel.app/)
 
 ---
 
