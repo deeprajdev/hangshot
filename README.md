@@ -16,4 +16,4 @@ Website: [hangshot.vercel.app](https://hangshot.vercel.app/)
 
 ---
 
-Made by [@deeprajO1](https://x.com/deeprajO1). Inspired by [@alejandr0bujan](https://x.com/alejandr0bujan)'s clothesline for Mac.
+Made by [@deeprajO1](https://x.com/deeprajO1).
