@@ -357,52 +357,18 @@ footer b, footer a { color: var(--fg); }
       <h2 id="changelog-title">What's new</h2>
       <ol class="log">
         <li>
-          <div class="when"><span class="ver">v1.2.3</span><time datetime="2026-10-08">Oct 8, 2026</time></div>
+          <div class="when"><span class="ver">v1</span><time datetime="2026-10-08">Oct 8, 2026</time></div>
           <div class="what">
-            <h3>Drag and paste, fixed</h3>
-            <ul>
-              <li>Drag a card off the line and drop it into any app or folder, even apps right under the line.</li>
-              <li>Copy now pastes in every app: Paint, Word, WhatsApp, Discord, Chrome and more.</li>
-            </ul>
-          </div>
-        </li>
-        <li>
-          <div class="when"><span class="ver">v1.2.0</span><time datetime="2026-10-08">Oct 8, 2026</time></div>
-          <div class="what">
-            <h3>One-click updates</h3>
-            <ul>
-              <li>When a new version is ready, a small popup asks: Restart now, or Later.</li>
-              <li>Hangshot checks for updates every hour, so new versions reach you the same day.</li>
-              <li>"Restart to update" is also in the tray menu and in Settings.</li>
-            </ul>
-          </div>
-        </li>
-        <li>
-          <div class="when"><span class="ver">v1.1.0</span><time datetime="2026-10-08">Oct 8, 2026</time></div>
-          <div class="what">
-            <h3>Paper look, delete, drop anywhere</h3>
-            <ul>
-              <li>A clean white look everywhere, plus a new icon.</li>
-              <li>Pull a card down a little and drop it straight into Discord, WhatsApp, Chrome or a folder.</li>
-              <li>Copy button on every card, then Ctrl + V anywhere.</li>
-              <li>Select screenshots in the basket and delete them, or delete them all. Undo if you change your mind. Your image files stay on your PC.</li>
-              <li>Drag several selected screenshots into an app at once.</li>
-              <li>A new right-click menu.</li>
-            </ul>
-          </div>
-        </li>
-        <li>
-          <div class="when"><span class="ver">v1.0.0</span><time datetime="2026-10-07">Oct 7, 2026</time></div>
-          <div class="what">
-            <h3>First release</h3>
+            <h3>Hangshot v1</h3>
             <ul>
               <li>Screenshots drop onto a clothesline across the top of your screen and swing into place.</li>
               <li>Catches Win + Shift + S, Win + PrtSc, PrtSc, Snipping Tool, ShareX and Greenshot.</li>
+              <li>Grab a card and drop it into any app or folder: Discord, WhatsApp, Chrome, Word, Paint and more.</li>
+              <li>Copy button on every card, then Ctrl + V anywhere.</li>
               <li>Pixel-perfect thumbnails at 125% and 150% scaling. Originals are never touched.</li>
-              <li>Drag a card into any app, pin the keepers, flick the rest into the basket.</li>
-              <li>Basket history you can search by app, window title or date.</li>
-              <li>Tucks away while you work and hides during fullscreen games.</li>
-              <li>Updates itself.</li>
+              <li>Basket history you can search by app, window title or date. Select screenshots to delete, or delete them all, with Undo. Your image files stay on your PC.</li>
+              <li>A clean white look that tucks away while you work and hides during fullscreen games.</li>
+              <li>Updates itself: when an update is ready, a small popup asks Restart now or Later.</li>
             </ul>
           </div>
         </li>
@@ -421,7 +387,7 @@ footer b, footer a { color: var(--fg); }
         <p>Open this page on your Windows PC to install.</p>
         <div class="row"><button class="btn btn-accent btn-sm" type="button" data-copy>Copy link</button></div>
       </div>
-      <p class="meta"><span id="version">v1.0.0</span><span>107 MB</span><span>Windows 10 and 11, 64-bit</span><span id="downloads" hidden></span></p>
+      <p class="meta"><span id="version">v1</span><span>107 MB</span><span>Windows 10 and 11, 64-bit</span><span id="downloads" hidden></span></p>
     </div>
   </section>
 </main>
@@ -461,7 +427,8 @@ footer b, footer a { color: var(--fg); }
   const get = (u) => fetch(u, { headers: { Accept: 'application/vnd.github+json' } }).then((r) => (r.ok ? r.json() : Promise.reject()));
   get(`${API}/releases`).then((rel) => {
     const pub = rel.filter((r) => !r.draft && !r.prerelease);
-    if (pub[0]) document.getElementById('version').textContent = pub[0].tag_name;
+    const named = pub.find((r) => /^v\d+$/.test(r.tag_name)); // public names only (v1, v2), never build numbers
+    if (named) document.getElementById('version').textContent = named.tag_name;
     const n = pub.reduce((sum, r) => sum + r.assets.filter((a) => a.name.endsWith('.exe')).reduce((t, a) => t + a.download_count, 0), 0);
     if (n >= 25) { const d = document.getElementById('downloads'); d.textContent = `${n.toLocaleString()} downloads`; d.hidden = false; }
   }).catch(() => {});
